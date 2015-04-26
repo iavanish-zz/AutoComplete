@@ -4,8 +4,6 @@ import java.util.*;
 
 public class Tokenizer {
 
-	private Scanner scan;
-
 	public Tokenizer() {
 
 	}
@@ -89,9 +87,10 @@ public class Tokenizer {
 
 		try {
 			File file = new File(fileName);
-			scan = new Scanner(file);
+			Scanner scan = new Scanner(file);
 			scan.useDelimiter("\\Z");
 			String text = scan.next();
+			scan.close();
 			return text;
 		}
 		catch(Exception exception) {

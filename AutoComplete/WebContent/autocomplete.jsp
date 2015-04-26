@@ -1,25 +1,33 @@
 <%@page import="java.util.*"%>
+<%@page import="java.io.*"%>
 <%
-    // Create ArrayList and add some items
-    ArrayList<String> as=new ArrayList<String>();
-    as.add("Google");
-    as.add("Yahoo");
-    as.add("Apple");
-    as.add("Microsoft");
-    as.add("Linkedin");
-    as.add("Facebook");
-    as.add("IBM");
-    as.add("Oracle");
-    as.add("Salesforce");
-    as.add("Amazon");
     
-        String s=request.getParameter("com");
+	String[] tokens;
+
+   	File file;
+   	Scanner scan;
+   	String text = "";
+    
+    try {
+  		file = new File("D:/Codes/EclipseWorkspace/AutoComplete/AutoComplete/tokensFile.out");
+    	System.out.println("File Created");
+		scan = new Scanner(file);
+		scan.useDelimiter("\\Z");
+		text = scan.next();
+		scan.close();
+    }
+    catch(FileNotFoundException exception) {
+    	System.out.println("Exception in JSP");
+    }
+    
+	tokens = text.split("\n");
+    		
+    String query = request.getParameter("com");
         
-            for(String st:as)
-            {
-                if(st.toLowerCase().startsWith(s.toLowerCase()))
-                {
-                    out.println(st);
-                }
-            }
+    for(int i = 0; i < tokens.length; i++) {
+        if(tokens[i].startsWith(query.toLowerCase())) {
+            out.println(tokens[i]);
+        }
+    }
+    
 %>
