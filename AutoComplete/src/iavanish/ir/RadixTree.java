@@ -45,6 +45,7 @@ public class RadixTree {
 				temp = stack.pop();
 				if(temp != null && temp != this.root) {
 					temp.words.add(tokens[i]);
+					//Collections.sort(temp.words);
 				}
 				
 			}
