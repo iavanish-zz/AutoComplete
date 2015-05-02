@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 public class Tokenizer {
-
+	
 	public Tokenizer() {
 
 	}
@@ -29,6 +29,8 @@ public class Tokenizer {
 			StringBuilder writableText = new StringBuilder();
 	          
 			HashMap <String, Integer> hashedTokens = new HashMap <String, Integer> ();
+			
+			int noOfTokens = 0;
 
 			for(int i = 0; i < listOfFiles.length; i++) {
 
@@ -41,14 +43,7 @@ public class Tokenizer {
                 
 					outer: for(int j = 0; j < tokens.length; j++) {
 
-						for(int k = 0; k < tokens[j].length(); k++) {
-							char c = tokens[j].charAt(k);
-							if((c < 48) || ((c > 57) && (c < 97)) || (c > 122)) {
-								continue outer;
-							}
-						}
-						
-						if((tokens[j].length() < 1) || (tokens[j].length() > 15)) {
+						if((tokens[j].length() < 1) || (tokens[j].length() > 14)) {
 							continue;
 						}
 
@@ -56,10 +51,32 @@ public class Tokenizer {
 							continue;
 						}
 
-						else {
-							hashedTokens.put(tokens[j], new Integer(1));
-							writableText.append(tokens[j]);
-							writableText.append("\n");
+						char repeatedChar = '*';
+						int repeatedTimes = 0;
+						for(int k = 0; k < tokens[j].length(); k++) {
+							char c = tokens[j].charAt(k);
+							if((c < 97) || (c > 122)) {
+								continue outer;
+							}
+							if(c == repeatedChar) {
+								repeatedTimes++;
+							}
+							else {
+								repeatedChar = c;
+								repeatedTimes = 1;
+							}
+							if(repeatedTimes > 2) {
+								continue outer;
+							}
+						}
+						
+						hashedTokens.put(tokens[j], new Integer(1));
+						writableText.append(tokens[j]);
+						writableText.append("\n");
+						noOfTokens++;
+						
+						if(noOfTokens > MAX_TOKENS) {
+							break;
 						}
 
 					}
@@ -97,10 +114,12 @@ public class Tokenizer {
 
 	}
 
+	private static final int MAX_TOKENS = 800000;
+	
 	public String[] extractTokensFromText(String text) {
 
 		text = text.toLowerCase();
-		String[] tokens = text.split("[`~!@#$%^&*\\(\\)-_=+\\[\\]\\{\\}|\\\\;:'\"\n,\\<\\>.?/\\s]+");
+		String[] tokens = text.split("[0123456789`~!@#$%^&*\\(\\)-_=+\\[\\]\\{\\}|\\\\;:'\"\n,\\<\\>.?/\\s]+");
 		return tokens;
 
 	}

@@ -11,7 +11,7 @@ public class FileNameExtractor {
 
 		FileNameExtractor obj = new FileNameExtractor();
 		
-		File file = new File("wiki-small");
+		File file = new File("D:/IR Project/Data/pa1/wiki-large");
 		obj.fileNames = new StringBuilder();
 
         File[] files = file.listFiles();
