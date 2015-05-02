@@ -32,7 +32,7 @@ public class Tokenizer {
 			
 			int noOfTokens = 0;
 
-			for(int i = 0; i < listOfFiles.length; i++) {
+			outer: for(int i = 0; i < listOfFiles.length; i++) {
 
 				File temp = new File(listOfFiles[i]);
           
@@ -41,7 +41,7 @@ public class Tokenizer {
 					String text = extractTextFromFile(temp.toString());
 					String[] tokens = extractTokensFromText(text);
                 
-					outer: for(int j = 0; j < tokens.length; j++) {
+					inner: for(int j = 0; j < tokens.length; j++) {
 
 						if((tokens[j].length() < 1) || (tokens[j].length() > 14)) {
 							continue;
@@ -56,7 +56,7 @@ public class Tokenizer {
 						for(int k = 0; k < tokens[j].length(); k++) {
 							char c = tokens[j].charAt(k);
 							if((c < 97) || (c > 122)) {
-								continue outer;
+								continue inner;
 							}
 							if(c == repeatedChar) {
 								repeatedTimes++;
@@ -66,7 +66,7 @@ public class Tokenizer {
 								repeatedTimes = 1;
 							}
 							if(repeatedTimes > 2) {
-								continue outer;
+								continue inner;
 							}
 						}
 						
@@ -76,7 +76,7 @@ public class Tokenizer {
 						noOfTokens++;
 						
 						if(noOfTokens > MAX_TOKENS) {
-							break;
+							break outer;
 						}
 
 					}
@@ -114,7 +114,7 @@ public class Tokenizer {
 
 	}
 
-	private static final int MAX_TOKENS = 800000;
+	private static final int MAX_TOKENS = 789012;
 	
 	public String[] extractTokensFromText(String text) {
 

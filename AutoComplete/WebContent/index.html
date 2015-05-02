@@ -1,13 +1,17 @@
+
 <html>
+
     <head>
     
         <title>AutoComplete Search</title>
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
         <script>
-                // When any key is down
-                $(document).keydown(function(){
+
+        		// When any key is down
+                $(document).keydown(function() {
 
                     // Get the input element and its value
                     var i=$("#com");
@@ -16,24 +20,32 @@
                     // Send request only if user types alphabet
                     // because auto.jsp returns names of companies
                     // which contains only alphabets
-                    if(val.match(/^[A-z]+$/))
-                    {
+                    if(val.match(/^[A-z]+$/)) {
+                    	
                         // Send request and get the data
-                        $.get("autocomplete.jsp?com="+val,function(data){
+                        $.get("autocomplete.jsp?com="+val,function(data) {
 
                             // Get each item separated by new line
                             var items=data.split("\n");
 
                             // put those items in autocomplete! That's it!
                             i.autocomplete({source:items});
+                            
                         });
+                        
                     }
                     
                 });
+        		
         </script>
+        
     </head>
     
+    
     <body>
-        <input type="text" id="com" name="com"/>
+    
+        <input type="text" id="com" name="com" style="width:400px; height:30px;"/>
+    
     </body>
+    
 </html>

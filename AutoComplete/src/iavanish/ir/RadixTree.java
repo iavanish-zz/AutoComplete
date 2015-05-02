@@ -23,8 +23,6 @@ public class RadixTree {
 			
 			RadixTreeNode temp = this.root;
 			
-			Stack <RadixTreeNode> stack = new Stack <RadixTreeNode> ();
-			
 			for(int j = 0; j < tokens[i].length(); j++) {
 				
 				char currentCharacter = tokens[i].charAt(j);
@@ -33,20 +31,13 @@ public class RadixTree {
 				if(temp.children[currentIndex] == null) {
 					temp.children[currentIndex] = initializeNewNode(temp.children[currentIndex], tokens[i].substring(0,j+1));
 				}
-				
-				temp = temp.children[currentIndex];
-				
-				stack.push(temp);
-				
-			}
 			
-			while(!stack.empty()) {
-				
-				temp = stack.pop();
+				//if(temp != null && temp != this.root && temp.words.size() < 200) {
 				if(temp != null && temp != this.root) {
 					temp.words.add(tokens[i]);
-					//Collections.sort(temp.words);
 				}
+				
+				temp = temp.children[currentIndex];
 				
 			}
 			
@@ -57,6 +48,8 @@ public class RadixTree {
 	}
 
 	public ArrayList <String> search(String w) {
+		
+		w = w.toLowerCase();
 		
 		RadixTreeNode temp = this.root;
 		
@@ -79,7 +72,6 @@ public class RadixTree {
 	private RadixTreeNode initializeNewNode(RadixTreeNode newNode, String data) {
 		
 		newNode = new RadixTreeNode();
-		newNode.data = data;
 		newNode.words = new ArrayList <String> ();
 		newNode.children = new RadixTreeNode[36];
 		
@@ -101,18 +93,6 @@ public class RadixTree {
 		return cToI;
 		
 	}
-	
-	/*
-	private char intToChar(int c) {
-		
-		c += 48;
-		if(c > 57) {
-			c += 39;
-		}
-		return (char)c;
-		
-	}
-	*/
 	
 	private String[] getTokens() {
 		
