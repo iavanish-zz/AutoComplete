@@ -32,8 +32,8 @@ public class RadixTree {
 					temp.children[currentIndex] = initializeNewNode(temp.children[currentIndex], tokens[i].substring(0,j+1));
 				}
 			
-				//if(temp != null && temp != this.root && temp.words.size() < 200) {
-				if(temp != null && temp != this.root) {
+				if(temp != null && temp != this.root && temp.words.size() < 200) {
+				//if(temp != null && temp != this.root) {
 					temp.words.add(tokens[i]);
 				}
 				
