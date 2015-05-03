@@ -1,8 +1,8 @@
+
 package iavanish.ir;
 
 import java.io.*;
 import java.util.*;
-
 
 public class RadixTree {
 	
@@ -10,8 +10,13 @@ public class RadixTree {
 	
 	public RadixTree() {
 		
-		root = this.initializeNewNode(root, "");
+		root = this.initializeNewNode(root);
 		
+	}
+	
+	public static void main(String[] args) {
+		RadixTree obj = new RadixTree();
+		obj.initialize();
 	}
 	
 	public void initialize() {
@@ -29,11 +34,11 @@ public class RadixTree {
 				int currentIndex = charToInt(currentCharacter);
 				
 				if(temp.children[currentIndex] == null) {
-					temp.children[currentIndex] = initializeNewNode(temp.children[currentIndex], tokens[i].substring(0,j+1));
+					temp.children[currentIndex] = initializeNewNode(temp.children[currentIndex]);
 				}
 			
-				if(temp != null && temp != this.root && temp.words.size() < 200) {
-				//if(temp != null && temp != this.root) {
+				//if(temp != null && temp != this.root && temp.words.size() < 200) {
+				if(temp != null && temp != this.root) {
 					temp.words.add(tokens[i]);
 				}
 				
@@ -69,7 +74,7 @@ public class RadixTree {
 		
 	}
 	
-	private RadixTreeNode initializeNewNode(RadixTreeNode newNode, String data) {
+	private RadixTreeNode initializeNewNode(RadixTreeNode newNode) {
 		
 		newNode = new RadixTreeNode();
 		newNode.words = new ArrayList <String> ();
@@ -107,7 +112,7 @@ public class RadixTree {
 			scan.close();
 	    }
 	    catch(Exception exception) {
-	    	System.out.println("Exception in JSP");
+	    	System.out.println("Exception in getTokens");
 	    }
 	    
 		tokens = text.split("\n");

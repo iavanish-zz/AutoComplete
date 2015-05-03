@@ -1,3 +1,4 @@
+
 package iavanish.ir;
 
 import java.io.File;
@@ -6,6 +7,10 @@ import java.io.PrintWriter;
 public class FileNameExtractor {
 
 	private StringBuilder fileNames;
+	
+	public FileNameExtractor() {
+
+	}
 	
 	public static void main(String[] args) {
 
