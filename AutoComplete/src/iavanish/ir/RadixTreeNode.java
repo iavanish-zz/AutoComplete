@@ -5,7 +5,7 @@ import java.util.*;
 
 public class RadixTreeNode {
 	
-	public ArrayList <String> words;
+	public List <String> words;
 	public RadixTreeNode[] children;
 	
 }

@@ -22,7 +22,7 @@ public void jspInit() {
     		
     String query = request.getParameter("com");
      
-    ArrayList <String> suggestions = radixTree.search(query);
+    List <String> suggestions = radixTree.search(query);
     
     if(suggestions != null) {
     

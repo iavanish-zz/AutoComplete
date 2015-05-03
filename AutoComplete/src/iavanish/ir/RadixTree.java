@@ -37,8 +37,8 @@ public class RadixTree {
 					temp.children[currentIndex] = initializeNewNode(temp.children[currentIndex]);
 				}
 			
-				//if(temp != null && temp != this.root && temp.words.size() < 200) {
-				if(temp != null && temp != this.root) {
+				if((temp != null) && (temp != this.root) && (temp.words.size() < 1000)) {
+				//if((temp != null) && (temp != this.root)) {
 					temp.words.add(tokens[i]);
 				}
 				
@@ -52,7 +52,7 @@ public class RadixTree {
 		
 	}
 
-	public ArrayList <String> search(String w) {
+	public List <String> search(String w) {
 		
 		w = w.toLowerCase();
 		
@@ -69,7 +69,15 @@ public class RadixTree {
 			return null;
 		}
 		else {
-			return temp.words;
+			return temp.words.subList(0, Math.min(temp.words.size(), 100));
+			/*
+			if(temp.words.size() > 100) {
+				return temp.words.subList(0, 100);
+			}
+			else {
+				return temp.words;
+			}
+			*/
 		}
 		
 	}
