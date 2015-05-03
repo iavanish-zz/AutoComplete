@@ -73,9 +73,9 @@ public class RadixTree {
 		
 		newNode = new RadixTreeNode();
 		newNode.words = new ArrayList <String> ();
-		newNode.children = new RadixTreeNode[36];
+		newNode.children = new RadixTreeNode[26];
 		
-		for(int i = 0; i < 36; i++) {
+		for(int i = 0; i < 26; i++) {
 			newNode.children[i] = null;
 		}
 
@@ -86,10 +86,7 @@ public class RadixTree {
 	private int charToInt(char c) {
 		
 		int cToI = (int)c;
-		cToI -= 48;
-		if(cToI > 9) {
-			cToI -= 39;
-		}
+		cToI -= 97;
 		return cToI;
 		
 	}
