@@ -17,9 +17,7 @@
                     var i=$("#com");
                     var val=i.val();
 
-                    // Send request only if user types alphabet
-                    // because auto.jsp returns names of companies
-                    // which contains only alphabets
+                    
                     if(val.match(/^[A-z]+$/)) {
                     	
                         // Send request and get the data
@@ -28,8 +26,7 @@
                             // Get each item separated by new line
                             var items=data.split("\n");
 
-                            // put those items in autocomplete! That's it!
-                            i.autocomplete({source:items});
+	                        i.autocomplete({source:items});
                             
                         });
                         
